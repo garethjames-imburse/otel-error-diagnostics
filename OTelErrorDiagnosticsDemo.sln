@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTelErrorDiagnosticsDemo.Api", "src\OTelErrorDiagnosticsDemo.Api\OTelErrorDiagnosticsDemo.Api.csproj", "{6595B752-4195-45DD-B8D9-C8AEB53206DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F6FD8FF-2CCF-4A4F-8FC1-BBF3AFB22B98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTelErrorDiagnosticsDemo.Common", "src\OTelErrorDiagnosticsDemo.Common\OTelErrorDiagnosticsDemo.Common.csproj", "{B72EF603-4F32-4D54-B76A-13ABB3783137}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTelErrorDiagnosticsDemo.Worker", "src\OTelErrorDiagnosticsDemo.Worker\OTelErrorDiagnosticsDemo.Worker.csproj", "{DC802264-3259-4610-A84E-0643185CDA2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{253D2751-2BAC-4F2D-AAFF-C1981B5506B7}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		docker-compose.env = docker-compose.env
+		docker-compose.yaml = docker-compose.yaml
+		nuget.config = nuget.config
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6595B752-4195-45DD-B8D9-C8AEB53206DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6595B752-4195-45DD-B8D9-C8AEB53206DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6595B752-4195-45DD-B8D9-C8AEB53206DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6595B752-4195-45DD-B8D9-C8AEB53206DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B72EF603-4F32-4D54-B76A-13ABB3783137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B72EF603-4F32-4D54-B76A-13ABB3783137}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B72EF603-4F32-4D54-B76A-13ABB3783137}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B72EF603-4F32-4D54-B76A-13ABB3783137}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC802264-3259-4610-A84E-0643185CDA2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC802264-3259-4610-A84E-0643185CDA2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC802264-3259-4610-A84E-0643185CDA2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC802264-3259-4610-A84E-0643185CDA2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6595B752-4195-45DD-B8D9-C8AEB53206DC} = {3F6FD8FF-2CCF-4A4F-8FC1-BBF3AFB22B98}
+		{B72EF603-4F32-4D54-B76A-13ABB3783137} = {3F6FD8FF-2CCF-4A4F-8FC1-BBF3AFB22B98}
+		{DC802264-3259-4610-A84E-0643185CDA2D} = {3F6FD8FF-2CCF-4A4F-8FC1-BBF3AFB22B98}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABD2DFE2-58BE-4D26-8198-4A35BCEC70C0}
+	EndGlobalSection
+EndGlobal

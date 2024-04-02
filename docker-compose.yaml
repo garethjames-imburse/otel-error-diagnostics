@@ -1,0 +1,20 @@
+version: '3'
+services:
+  datadog-agent:
+    image: gcr.io/datadoghq/agent:7
+    ports:
+      - "8125:8125/udp"
+      - "8126:8126/tcp"
+      - "4317:4317/tcp"
+    volumes:
+      - //var/run/docker.sock://var/run/docker.sock
+      - //proc/://host/proc/:ro
+      - //sys/fs/cgroup/://host/sys/fs/cgroup:ro
+      - //var/lib/docker/containers://var/lib/docker/containers:ro
+      - //opt/datadog-agent/run://opt/datadog-agent/run:rw
+    networks:
+      - otel-error-diagnostics
+
+networks:
+  otel-error-diagnostics:
+    driver: bridge

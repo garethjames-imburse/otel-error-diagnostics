@@ -1,0 +1,6 @@
+@OTelErrorDiagnosticsDemo.Api_HostAddress = http://localhost:5173
+
+GET {{OTelErrorDiagnosticsDemo.Api_HostAddress}}/
+Accept: application/json
+
+###
