@@ -3,18 +3,62 @@ services:
   datadog-agent:
     image: gcr.io/datadoghq/agent:7
     ports:
+      - "4317:4317/tcp"
       - "8125:8125/udp"
       - "8126:8126/tcp"
-      - "4317:4317/tcp"
+    environment:
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_APM_ENABLED=true
+      - DD_APM_NON_LOCAL_TRAFFIC=true
+      - DD_CONTAINER_EXCLUDE_LOGS=name:datadog-agent
+      - DD_CONTAINER_EXCLUDE=name:datadog-agent
+      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_LOGS_ENABLED=true
+      - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317
+      - DD_SITE=datadoghq.eu
+      - DD_SKIP_SSL_VALIDATION=true
+      - DD_SYSTEM_PROBE_ENABLED=false
     volumes:
-      - //var/run/docker.sock://var/run/docker.sock
+      - //opt/datadog-agent/run://opt/datadog-agent/run:rw
       - //proc/://host/proc/:ro
       - //sys/fs/cgroup/://host/sys/fs/cgroup:ro
       - //var/lib/docker/containers://var/lib/docker/containers:ro
-      - //opt/datadog-agent/run://opt/datadog-agent/run:rw
+      - //var/run/docker.sock://var/run/docker.sock
     networks:
       - otel-error-diagnostics
-
+  api:
+    build:
+      context: .
+      dockerfile: ./api.Dockerfile
+    labels:
+      com.datadoghq.ad.logs: '[{"source":"csharp", "service":"otelerrordiagnosticsdemo-api", "version":"0.1", "env":"local"}]'
+    ports:
+      - "5173:8080/tcp"
+    environment:
+      - AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE=true
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://datadog-agent:4317
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=0.1,env=local
+      - OTEL_SERVICE_NAME=otelerrordiagnosticsdemo-api
+      - SERILOG__WRITETO__CONSOLE__ARGS__FORMATTER=Serilog.Formatting.Compact.RenderedCompactJsonFormatter, Serilog.Formatting.Compact
+      - SERVICEBUS__CONNECTIONSTRING=${SERVICEBUS__CONNECTIONSTRING}
+    networks:
+      - otel-error-diagnostics
+  worker:
+    build:
+      context: .
+      dockerfile: ./worker.Dockerfile
+    labels:
+      com.datadoghq.ad.logs: '[{"source":"csharp", "service":"otelerrordiagnosticsdemo-worker", "version":"0.1", "env":"local"}]'
+    environment:
+      - AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE=true
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://datadog-agent:4317
+      - OTEL_RESOURCE_ATTRIBUTES=service.version=0.1,env=local
+      - OTEL_SERVICE_NAME=otelerrordiagnosticsdemo-worker
+      - SERILOG__WRITETO__CONSOLE__ARGS__FORMATTER=Serilog.Formatting.Compact.RenderedCompactJsonFormatter, Serilog.Formatting.Compact
+      - SERVICEBUS__CONNECTIONSTRING=${SERVICEBUS__CONNECTIONSTRING}
+    networks:
+      - otel-error-diagnostics
 networks:
   otel-error-diagnostics:
     driver: bridge

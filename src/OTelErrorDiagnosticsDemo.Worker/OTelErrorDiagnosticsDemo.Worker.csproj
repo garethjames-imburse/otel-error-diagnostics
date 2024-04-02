@@ -1,8 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
   <ItemGroup>
+    <PackageReference Include="Azure.Messaging.ServiceBus" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+    <PackageReference Include="Serilog.Extensions.Hosting" />
+    <PackageReference Include="Serilog.Formatting.Compact" />
+    <PackageReference Include="Serilog.Settings.Configuration" />
+    <PackageReference Include="Serilog.Sinks.Console" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OTelErrorDiagnosticsDemo.Common\OTelErrorDiagnosticsDemo.Common.csproj" />
+    <ProjectReference Include="..\OTelErrorDiagnosticsDemo.Contract\OTelErrorDiagnosticsDemo.Contract.csproj" />
   </ItemGroup>
 </Project>

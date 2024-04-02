@@ -1,6 +1,12 @@
 @OTelErrorDiagnosticsDemo.Api_HostAddress = http://localhost:5173
 
-GET {{OTelErrorDiagnosticsDemo.Api_HostAddress}}/
+POST {{OTelErrorDiagnosticsDemo.Api_HostAddress}}/message
 Accept: application/json
+Content-Type: application/json
+traceparent: null
+
+{
+  "data": "1"
+}
 
 ###
