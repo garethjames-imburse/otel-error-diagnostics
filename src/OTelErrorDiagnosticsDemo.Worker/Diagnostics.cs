@@ -21,9 +21,11 @@ internal static partial class Diagnostics
 
         var gitAttributes = new Dictionary<string, object>(2)
         {
-            { "git.commit.sha", "" },
+            { "git.commit.sha", sha },
             { "git.repository_url", "https://github.com/garethjames-imburse/otel-error-diagnostics" },
         };
+
+        resourceBuilder.AddAttributes(gitAttributes);
 
         return resourceBuilder;
     }
