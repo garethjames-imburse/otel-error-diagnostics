@@ -24,7 +24,9 @@ public class Program
         });
 
         builder.Services.AddOpenTelemetry()
-            .ConfigureResource(configure => configure.AddEnvironmentVariableDetector())
+            .ConfigureResource(configure => configure
+                .AddEnvironmentVariableDetector()
+                .AddGitAttributes())
             .WithTracing(builder =>
             {
                 builder

@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
+using OpenTelemetry.Trace;
 using OTelErrorDiagnosticsDemo.Contract;
 using OTelErrorDiagnosticsDemo.Contract.Commands;
 
@@ -45,6 +46,12 @@ public sealed class MessageConsumer
                 _logger.LogError(ex, "An error occurred while consuming message: {MessageId}", args.Message.MessageId);
 
                 await args.DeadLetterMessageAsync(args.Message, ex.Message, ex.ToString(), CancellationToken.None);
+
+                if (activity is not null)
+                {
+                    activity.SetStatus(Status.Error.WithDescription("Something went wrong!"));
+                    activity.RecordException(ex);
+                }
             }
         }
     }

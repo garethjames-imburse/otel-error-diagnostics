@@ -6,7 +6,7 @@ Content-Type: application/json
 traceparent: null
 
 {
-  "data": "1"
+  "data": "ABC"
 }
 
 ###
