@@ -16,8 +16,6 @@ public class MyCommandHandler : IMessageHandler<MyCommand>
     {
         var myCommand = (MyCommand)message;
 
-        var number = int.Parse(myCommand.Data.ToString()!);
-
         _logger.LogInformation("Handled command with data: {Data}", myCommand.Data);
 
         return Task.CompletedTask;
